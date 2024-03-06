@@ -29,9 +29,11 @@ def add_username_phone(args, contacts):
 @input_error
 def change_username_phone(args, contacts):
     name, new_phone = args
-    contacts[name] = new_phone
-    return "Contact's phone changed."
-
+    if name in contacts:
+        contacts[name] = new_phone
+        return "Contact's phone changed."
+    else:
+        raise KeyError
 
 @input_error
 def phone_username(args, contacts):
