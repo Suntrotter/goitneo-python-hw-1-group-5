@@ -1,5 +1,4 @@
 from collections import UserDict
-import datetime
 from datetime import datetime as dt
 
 
@@ -94,7 +93,7 @@ class AddressBook(UserDict):
     
 
     def get_birthdays_per_week(users):
-        today = datetime.today().date()
+        today = dt.today().date()
         birthdays = {}
         
         for user in users:

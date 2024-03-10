@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime as dt
 from Address_book import *
 
 
@@ -98,7 +98,7 @@ def birthdays(book):
         mm=tempstr[5:7]
         dd=tempstr[8:10]
         print(yy+""+mm+""+dd)
-        #a=datetime(int(yy),int(mm),int(dd))
+        a=dt(int(yy),int(mm),int(dd))
         #it['birthday']=Rec.birthday.birthday
         users.append(it)
     print(users)    
