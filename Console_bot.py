@@ -1,4 +1,4 @@
-
+import datetime
 from Address_book import *
 
 
@@ -65,7 +65,7 @@ def phone_username(args, book):
 
 @input_error
 def show_birthday(args, book):
-    name = args
+    name = args[0]
     Rec = book.find_record(name)
     return f'{name}: {Rec.birthday.birthday}'
 
@@ -85,8 +85,40 @@ def print_all(book):
     return "Contacts printed"
 
 
+@input_error
+def birthdays(book):
+    users = []
+    for item in book:
+        Rec=book.find_record(item)
+        it={}
+        it['name']=str(Rec.name)
+        tempstr=str(Rec.birthday.birthday)
+        print(tempstr)
+        yy=tempstr[:4]
+        mm=tempstr[5:7]
+        dd=tempstr[8:10]
+        print(yy+""+mm+""+dd)
+        #a=datetime(int(yy),int(mm),int(dd))
+        #it['birthday']=Rec.birthday.birthday
+        users.append(it)
+    print(users)    
+    AddressBook.get_birthdays_per_week(users)    
+    return "Birthdays printed"
+
+
+
 def main():
     book = AddressBook()
+    #
+    Rec=Record("Mary")
+    Rec.add_phone("1234567890")
+    Rec.add_birthday("13/02/2011")
+    book.add_record(Rec)
+    Rec=Record("John")
+    Rec.add_phone("0987654321")
+    Rec.add_birthday("11/03/2011")
+    book.add_record(Rec)
+    #
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
@@ -109,6 +141,8 @@ def main():
             print(add_birthday(args, book))
         elif command == "show_birthday":
             print(show_birthday(args, book))
+        elif command == "birthdays":
+            print(birthdays(book))
         else:
             print("Invalid command.")
 

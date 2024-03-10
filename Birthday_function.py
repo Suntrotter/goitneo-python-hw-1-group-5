@@ -1,4 +1,5 @@
 from datetime import datetime
+#import datetime
 
 def get_birthdays_per_week(users):
     today = datetime.today().date()
@@ -37,8 +38,9 @@ def get_birthdays_per_week(users):
     return birthdays
              
 
-users = [{"name": "Bill Gates", "birthday": datetime(1955, 3, 2)},
-         {"name": "Bill Dates", "birthday": datetime(1975, 3, 2)}]
+#users = [{"name": "Bill Gates", "birthday": datetime(1955, 3, 13)},
+#         {"name": "Bill Dates", "birthday": datetime(1975, 3, 21)}]
+users = [{'name': 'Mary', 'birthday': datetime.datetime(2011, 2, 13, 0, 0)}, {'name': 'John', 'birthday': datetime.datetime(2011, 3, 11, 0, 0)}]
 get_birthdays_per_week(users)
 
 
