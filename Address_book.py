@@ -65,7 +65,7 @@ class Record:
             return string
 
     def __str__(self):
-        string = f"Contact name: {self.name}, phones: {'; '.join(p for p in self.phones)}"
+        string = f"Contact name: {self.name}, phones: {'; '.join(p for p in self.phones)}, birthday: {self.birthday}"
         return string
 
 
