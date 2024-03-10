@@ -67,10 +67,10 @@ def phone_username(args, book):
 def show_birthday(args, book):
     name = args
     Rec = book.find_record(name)
-    return f'{Rec.birthday.birthday}: {birthday}'
+    return f'{name}: {Rec.birthday.birthday}'
 
     
- @input_error
+@input_error
 def add_birthday(args, book):
     name, new_birthday = args
     Rec = book.find_record(name)    
