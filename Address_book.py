@@ -31,7 +31,7 @@ class Birthday(Field):
 
 
 class Record:
-    def __init__(self, name, birthday):
+    def __init__(self, name, birthday=''):
         self.name = Name(name)
         self.birthday = Birthday(birthday)
         self.phones = []
@@ -40,7 +40,7 @@ class Record:
     def add_birthday(self, birthday):
         try:
             birthday = datetime.datetime.strptime(birthday, "%d/%m/%Y")   
-            self.birthday = birthday 
+            self.birthday.birthday = birthday 
         except:
             print("Incorrect date!") 
 
