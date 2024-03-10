@@ -99,7 +99,7 @@ def birthdays(book):
         dd=tempstr[8:10]
         print(yy+""+mm+""+dd)
         a=dt(int(yy),int(mm),int(dd))
-        #it['birthday']=Rec.birthday.birthday
+        it['birthday']=a
         users.append(it)
     print(users)    
     AddressBook.get_birthdays_per_week(users)    
