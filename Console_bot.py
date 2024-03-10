@@ -112,14 +112,14 @@ def birthdays(book):
 def main():
     book = AddressBook()
     #
-    Rec=Record("Mary")
-    Rec.add_phone("1234567890")
-    Rec.add_birthday("13/02/2011")
-    book.add_record(Rec)
-    Rec=Record("John")
-    Rec.add_phone("0987654321")
-    Rec.add_birthday("11/03/2011")
-    book.add_record(Rec)
+    #Rec=Record("Mary")
+    #Rec.add_phone("1234567890")
+    #Rec.add_birthday("13/02/2011")
+    #book.add_record(Rec)
+    #Rec=Record("John")
+    #Rec.add_phone("0987654321")
+    #Rec.add_birthday("11/03/2011")
+    #book.add_record(Rec)
     #
     print("Welcome to the assistant bot!")
     while True:
