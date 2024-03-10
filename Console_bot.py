@@ -74,10 +74,10 @@ def show_birthday(name, book):
 
 @input_error
 def add_birthday(args, book):
-    name, birthday = args
+    name, new_birthday = args
     Rec = book.find_record(name)
     print(Rec)
-    Rec.add_birthday(birthday)    
+    Rec.add_birthday(new_birthday)    
     print(Rec)
     return "Birthday added"
 
