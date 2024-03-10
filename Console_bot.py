@@ -64,21 +64,17 @@ def phone_username(args, book):
     return book[name]
 
 @input_error
-def show_birthday(name, book):
-    for contact in book:
-        if contact.key() == name:
-            birthday = contact['birthday']
-            print(book)
-            return f'{name}: {birthday}'
-        
+def show_birthday(args, book):
+    name = args
+    Rec = book.find_record(name)
+    return f'{Rec.birthday.birthday}: {birthday}'
 
-@input_error
+    
+ @input_error
 def add_birthday(args, book):
     name, new_birthday = args
-    Rec = book.find_record(name)
-    print(Rec)
-    Rec.add_birthday(new_birthday)    
-    print(Rec)
+    Rec = book.find_record(name)    
+    Rec.add_birthday(new_birthday)   
     return "Birthday added"
 
 @input_error
@@ -111,6 +107,8 @@ def main():
             print(print_all(book))
         elif command == "add_birthday":
             print(add_birthday(args, book))
+        elif command == "show_birthday":
+            print(show_birthday(args, book))
         else:
             print("Invalid command.")
 

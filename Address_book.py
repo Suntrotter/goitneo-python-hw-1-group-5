@@ -1,6 +1,5 @@
 from collections import UserDict
 import datetime
-from datetime import datetime
 
 
 class Field:
@@ -41,6 +40,7 @@ class Record:
         try:
             birthday = datetime.datetime.strptime(birthday, "%d/%m/%Y")   
             self.birthday.birthday = birthday 
+            print(self.birthday.birthday)
         except:
             print("Incorrect date!") 
 
