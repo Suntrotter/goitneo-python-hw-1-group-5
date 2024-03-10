@@ -38,8 +38,9 @@ class Record:
 
     def add_birthday(self, birthday):
         try:
-            birthday = datetime.datetime.strptime(birthday, "%d/%m/%Y")   
-            self.birthday.birthday = birthday 
+            birthday = dt.datetime.strptime(birthday, "%d/%m/%Y")  
+            print(birthday) 
+            self.birthday.birthday = birthday
             print(self.birthday.birthday)
         except:
             print("Incorrect date!") 
