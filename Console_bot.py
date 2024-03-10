@@ -1,5 +1,6 @@
 from datetime import datetime as dt
 from Address_book import *
+import re
 
 
 def input_error(func):
@@ -30,8 +31,7 @@ def add_username_phone(args, book):
         if len(phone) == 10:
             Rec=Record(name)
             Rec.add_phone(phone)
-            book.add_record(Rec)
-            print(book)
+            book.add_record(Rec)            
             return "Contact added."
         else:
             phone = input("Please enter a valid phone: ")
@@ -41,41 +41,49 @@ def add_username_phone(args, book):
 @input_error
 def change_username_phone(args, book):
     name, old_phone, new_phone = args
-    rec=book.find_record(name)  
-    rec.edit_phone(old_phone, new_phone)
-    print(rec)
-    print(book)
+    if len(str(old_phone)) == 10 and len(str(new_phone)) == 10:        
+        rec=book.find_record(name)  
+        rec.edit_phone(old_phone, new_phone)
+        return "Contact's phone changed."
+    elif len(str(old_phone)) != 10 and len(str(new_phone)) != 10: 
+        print("Invalid data")
+    else:
+        raise KeyError
     
-    return "Contact's phone changed."
-
-    #while True:
-        #if name in book and len(new_phone) == 10:
-            #book[name] = new_phone
-            #print(book)
-            #return "Contact's phone changed."
-        #elif name in book and len(new_phone) != 10:
-            #new_phone = input("Please enter a valid phone: ")
-        #else:
-            #raise KeyError
-
+  
 @input_error
 def phone_username(args, book):
-    name = args[0]    
-    return book[name]
+    name = args[0]
+    Rec = book.find_record(name)
+    if Rec:
+        return f'{name}: {Rec.phones}'
+    else:
+        return "Invalid name"
 
 @input_error
 def show_birthday(args, book):
     name = args[0]
     Rec = book.find_record(name)
-    return f'{name}: {Rec.birthday.birthday}'
+    if Rec:
+        return f'{name}: {Rec.birthday.birthday}'
+    else:
+        return "Invalid name"
 
     
 @input_error
 def add_birthday(args, book):
     name, new_birthday = args
-    Rec = book.find_record(name)    
-    Rec.add_birthday(new_birthday)   
-    return "Birthday added"
+    pattern_str = r'^\d{2}/\d{2}/\d{4}$'
+    if re.match(pattern_str, new_birthday): 
+        Rec = book.find_record(name)
+        if Rec:    
+            Rec.add_birthday(new_birthday) 
+            return "Birthday added"          
+        else:
+            return "Invalid name"
+    else:
+        return "Invalid birthday date"
+    
 
 @input_error
 def print_all(book):
@@ -92,16 +100,10 @@ def birthdays(book):
         Rec=book.find_record(item)
         it={}
         it['name']=str(Rec.name)
-        tempstr=str(Rec.birthday.birthday)
-        print(tempstr)
-        yy=tempstr[:4]
-        mm=tempstr[5:7]
-        dd=tempstr[8:10]
-        print(yy+""+mm+""+dd)
-        a=dt(int(yy),int(mm),int(dd))
-        it['birthday']=a
-        users.append(it)
-    #print(users)    
+        tempstr=str(Rec.birthday.birthday)              
+        a = dt(int(tempstr[:4]),int(tempstr[5:7]),int(tempstr[8:10]))
+        it['birthday'] = a
+        users.append(it)        
     AddressBook.get_birthdays_per_week(users)    
     return "Birthdays printed"
 

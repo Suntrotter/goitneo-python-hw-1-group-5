@@ -131,8 +131,7 @@ class AddressBook(UserDict):
 def handle_add(name, phone, book):
     record = Record(name)
     record.add_phone(phone)
-    book.add_record(record)
-    print(book)
+    book.add_record(record)    
     return book
 
 
