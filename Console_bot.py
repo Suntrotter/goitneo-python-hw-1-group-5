@@ -101,7 +101,7 @@ def birthdays(book):
         a=dt(int(yy),int(mm),int(dd))
         it['birthday']=a
         users.append(it)
-    print(users)    
+    #print(users)    
     AddressBook.get_birthdays_per_week(users)    
     return "Birthdays printed"
 

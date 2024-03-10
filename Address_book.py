@@ -39,9 +39,7 @@ class Record:
     def add_birthday(self, birthday):
         try:
             birthday = dt.strptime(birthday, "%d/%m/%Y")  
-            #print(birthday) 
             self.birthday.birthday = birthday
-            #print(self.birthday.birthday)
         except:
             print("Incorrect date!") 
 
