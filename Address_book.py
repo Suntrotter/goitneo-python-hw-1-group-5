@@ -1,4 +1,6 @@
 from collections import UserDict
+import datetime
+from datetime import datetime
 
 
 class Field:
@@ -23,10 +25,24 @@ class Phone(Field):
             print("Please enter a valid phone")
 
 
+class Birthday(Field):
+    def __init__(self, birthday):
+        self.birthday = birthday
+
+
 class Record:
-    def __init__(self, name):
+    def __init__(self, name, birthday):
         self.name = Name(name)
-        self.phones = ['0987654321', '1234567890']
+        self.birthday = Birthday(birthday)
+        self.phones = []
+
+
+    def add_birthday(self, birthday):
+        try:
+            birthday = datetime.datetime.strptime(birthday, "%d/%m/%Y")   
+            self.birthday = birthday 
+        except:
+            print("Incorrect date!") 
 
     def add_phone(self, phone):
         self.phones.append(phone)
@@ -74,6 +90,43 @@ class AddressBook(UserDict):
                 del self.data[record]
                 return self.data
         return "Unable to delete"
+    
+
+    def get_birthdays_per_week(users):
+        today = datetime.today().date()
+        birthdays = {}
+        
+        for user in users:
+            name = user["name"]
+            birthday = user["birthday"].date()  
+            birthday_this_year = birthday.replace(year=today.year)
+            
+            if birthday_this_year < today:
+                birthday_this_year = birthday.replace(year=today.year + 1)
+                
+            delta_days = (birthday_this_year - today).days
+            
+            if delta_days < 7:
+                day_of_the_week = birthday_this_year.strftime('%A')
+                
+                if day_of_the_week != "Sunday" and day_of_the_week != "Saturday":
+                    if day_of_the_week in birthdays:
+                        birthdays.setdefault(day_of_the_week).extend([name])
+                    else:
+                        birthdays[day_of_the_week] = [name]
+                        
+                else:
+                    if "Monday" in birthdays:
+                        birthdays.setdefault("Monday").extend([name])
+                    else:
+                        birthdays["Monday"] = [name]
+                
+        for key, value in birthdays.items():
+            if len(value) > 1:
+                value = ", ".join(str(element) for element in value)        
+            print(f'{key}: {value}')
+                
+        return birthdays
 
 
 def handle_add(name, phone, book):
