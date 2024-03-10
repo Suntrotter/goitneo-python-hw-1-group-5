@@ -81,7 +81,6 @@ def add_birthday(args, book):
     print(Rec)
     return "Birthday added"
 
-
 @input_error
 def print_all(book):
     for item in book:
